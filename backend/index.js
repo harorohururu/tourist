@@ -25,7 +25,6 @@ const sequelize = new Sequelize(
 );
 
 sequelize.authenticate()
-  .then(() => console.log('Connected to PostgreSQL'))
   .catch((err) => console.error('PostgreSQL connection error:', err));
 
 // Models
@@ -42,17 +41,11 @@ const SYNC_FLAG = './.db_synced';
 
 sequelize.sync()
   .then(() => {
-    // Check if flag file exists
     if (!fs.existsSync(SYNC_FLAG)) {
-      console.log('Database tables synced (created for the first time)');
       fs.writeFileSync(SYNC_FLAG, 'synced');
-    } else {
-      // Optionally, check for changes (not trivial with Sequelize)
-      // For now, only log if flag is missing
     }
   })
   .catch((err) => {
-    console.error('Sync error:', err);
     if (fs.existsSync(SYNC_FLAG)) fs.unlinkSync(SYNC_FLAG);
   });
 
@@ -87,12 +80,4 @@ function getLocalIp() {
   return 'localhost';
 }
 
-app.listen(PORT, () => {
-  const ip = getLocalIp();
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Detected local IP: ${ip}`);
-  console.log('---');
-  console.log('If you are running the frontend on a mobile device or emulator, update your API URL in AuthContext.jsx:');
-  console.log(`fetch('http://${ip}:${PORT}/api/users/login', { ... })`);
-  console.log('---');
-});
+app.listen(PORT, () => {});
