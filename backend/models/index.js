@@ -10,11 +10,19 @@ const sequelize = new Sequelize(
   }
 );
 
+const LandmarkType = require('./LandmarkType')(sequelize);
+const LandmarkInfo = require('./LandmarkInfo')(sequelize);
+const ContactPerson = require('./ContactPerson')(sequelize);
+const User = require('./User')(sequelize);
 const TouristInfo = require('./TouristInfo')(sequelize);
 const TouristCount = require('./TouristCount')(sequelize);
 
 module.exports = {
   sequelize,
+  LandmarkType,
+  LandmarkInfo,
+  ContactPerson,
+  User,
   TouristInfo,
   TouristCount,
 };
