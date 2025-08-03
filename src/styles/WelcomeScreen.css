@@ -1,3 +1,4 @@
+/* Import Poppins font */
 @font-face {
   font-family: 'Poppins';
   src: url('../Poppins/Poppins-Regular.ttf') format('truetype');
@@ -22,60 +23,495 @@
   font-weight: 600;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Poppins';
+  src: url('../Poppins/Poppins-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
 
+/* CSS Variables */
+:root {
+  --primary: #850000;
+  --primary-light: #a61e1e;
+  --primary-dark: #660000;
+  --secondary: #fdfffc;
+  --tertiary: #121113;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+}
+
+/* Welcome Screen Container */
 .welcome-screen {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: #fdfffc;
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: all;
-}
-.welcome-content {
-  text-align: center;
-  animation: popin 0.8s cubic-bezier(.68,-0.55,.27,1.55);
-}
-.welcome-title {
-  font-family: 'Poppins', Arial, sans-serif;
-  font-size: 2.5rem;
-  color: #850000;
-  font-weight: 700;
-  margin-bottom: 0.5em;
-  letter-spacing: 1px;
-}
-.welcome-title span {
-  color: #121113;
-}
-.welcome-subtitle {
-  font-family: 'Poppins', Arial, sans-serif;
-  font-size: 1.5rem;
-  color: #121113;
-  font-weight: 500;
-  margin: 0;
-}
-@keyframes popin {
-  0% { transform: scale(0.95); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  overflow: hidden;
 }
 
-@media (max-width: 600px) {
+/* Background */
+.welcome-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--gray-50) 50%, var(--secondary) 100%);
+}
+
+.background-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(133, 0, 0, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(133, 0, 0, 0.02) 0%, transparent 50%),
+    linear-gradient(45deg, transparent 49%, rgba(133, 0, 0, 0.01) 50%, transparent 51%);
+  background-size: 100px 100px, 150px 150px, 50px 50px;
+  animation: patternMove 20s linear infinite;
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(133, 0, 0, 0.05) 100%);
+}
+
+@keyframes patternMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+/* Welcome Content */
+.welcome-content {
+  text-align: center;
+  z-index: 10;
+  position: relative;
+  max-width: 900px;
+  padding: 2rem;
+}
+
+/* Official Header */
+.welcome-header {
+  margin-bottom: 2.5rem;
+}
+
+.official-seal {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+  animation: sealGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes sealGlow {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+
+.department-title {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--gray-700);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.25rem;
+}
+
+.office-title {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+
+.division-title {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.9;
+}
+
+/* Logo Section */
+.welcome-logo-section {
+  margin-bottom: 3rem;
+}
+
+.system-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo-circle {
+  width: 120px;
+  height: 120px;
+  border: 4px solid var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--gray-50) 100%);
+  box-shadow: 
+    0 8px 32px rgba(133, 0, 0, 0.15),
+    inset 0 2px 8px rgba(255, 255, 255, 0.8);
+  position: relative;
+  animation: logoRotate 20s linear infinite;
+}
+
+.logo-circle::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border: 2px solid transparent;
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: borderSpin 8s linear infinite;
+}
+
+.logo-inner {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo-icon {
+  font-size: 2.5rem;
+  filter: brightness(0) invert(1);
+}
+
+@keyframes logoRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes borderSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+/* Welcome Title */
+.welcome-title {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--gray-800);
+}
+
+.system-name {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+}
+
+.lipa-red {
+  color: var(--primary) !important;
+  -webkit-text-fill-color: var(--primary) !important;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(133, 0, 0, 0.3);
+}
+
+.system-full-name {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+/* Form Section */
+.welcome-form-section {
+  margin-bottom: 3rem;
+}
+
+.form-type-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: var(--secondary);
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(133, 0, 0, 0.2);
+  animation: badgePulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes badgePulse {
+  0% { transform: scale(1); box-shadow: 0 4px 12px rgba(133, 0, 0, 0.2); }
+  100% { transform: scale(1.02); box-shadow: 0 6px 16px rgba(133, 0, 0, 0.3); }
+}
+
+.welcome-subtitle {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.form-description {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 1rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+/* Footer */
+.welcome-footer {
+  border-top: 2px solid var(--gray-200);
+  padding-top: 2rem;
+}
+
+.loading-indicator {
+  margin-bottom: 1rem;
+}
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.loading-dots span {
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  animation: dotBounce 1.4s ease-in-out infinite both;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+.loading-dots span:nth-child(3) { animation-delay: 0s; }
+
+@keyframes dotBounce {
+  0%, 80%, 100% { 
+    transform: scale(0.8);
+    opacity: 0.5;
+  } 
+  40% { 
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+.loading-text {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.version-info {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .welcome-content {
+    padding: 1.5rem;
+  }
+
+  .welcome-title {
+    font-size: 2.25rem;
+  }
+
+  .welcome-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .logo-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .logo-icon {
+    font-size: 2rem;
+  }
+
+  .official-seal {
+    font-size: 2rem;
+  }
+
+  .office-title {
+    font-size: 1rem;
+  }
+
+  .department-title {
+    font-size: 0.8rem;
+  }
+
+  .division-title {
+    font-size: 0.7rem;
+  }
+
+  .form-description {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-content {
+    padding: 1rem;
+  }
+
+  .welcome-title {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+
+  .welcome-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .system-full-name {
+    font-size: 0.9rem;
+  }
+
+  .logo-circle {
+    width: 80px;
+    height: 80px;
+  }
+
+  .logo-icon {
+    font-size: 1.5rem;
+  }
+
+  .official-seal {
+    font-size: 1.75rem;
+  }
+
+  .form-description {
+    font-size: 0.9rem;
+  }
+
+  .form-type-badge {
+    font-size: 0.7rem;
+    padding: 0.4rem 1.2rem;
+  }
+
+  .welcome-header {
+    margin-bottom: 2rem;
+  }
+
+  .welcome-logo-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .welcome-footer {
+    padding-top: 1.5rem;
+  }
+}
+
+@media (max-width: 360px) {
   .welcome-title {
     font-size: 1.5rem;
   }
+
   .welcome-subtitle {
     font-size: 1.1rem;
   }
-  .welcome-content {
-    padding: 0 10px;
+
+  .system-full-name {
+    font-size: 0.85rem;
+  }
+
+  .office-title {
+    font-size: 0.9rem;
+  }
+
+  .department-title {
+    font-size: 0.75rem;
+  }
+
+  .division-title {
+    font-size: 0.65rem;
   }
 }
-@media (max-width: 400px) {
-  .welcome-title {
-    font-size: 1.1rem;
+
+/* Animation Enhancements */
+@media (prefers-reduced-motion: reduce) {
+  .background-pattern,
+  .logo-circle,
+  .logo-circle::before,
+  .official-seal,
+  .form-type-badge,
+  .loading-dots span {
+    animation: none;
   }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .welcome-title,
   .welcome-subtitle {
-    font-size: 0.9rem;
+    color: var(--tertiary);
+  }
+  
+  .system-name {
+    -webkit-text-fill-color: var(--primary);
+  }
+  
+  .background-pattern,
+  .background-overlay {
+    opacity: 0.5;
   }
 }
